@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!-- 
+Author: AnthonySuen
+Date: 2020-4-8
+-->
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="sensors">
+
+  <xacro:include filename="$(find scout_description)/urdf/universal_sensor_adder.xacro" />
+  <xacro:add_sensor sensor_name="camera" type="depth" x_offset="0.2" y_offset="0.0" z_offset="0.35" r="0" p="0" y="0">
+    <sensor_config>
+      <update_rate>20</update_rate>
+      <camera name="head">
+        <horizontal_fov>2.0</horizontal_fov>
+        <image>
+          <width>640</width> 
+          <height>480</height> 
+          <format>R8G8B8</format>
+        </image>
+        <clip>
+          <near>0.01</near>
+          <far>200.0</far>
+        </clip>
+      </camera>
+    </sensor_config>
+    <sensor_plugin_config>
+      <plugin name="kinect_camera_controller" filename="libgazebo_ros_openni_kinect.so">
+        <alwaysOn>true</alwaysOn>
+        <updateRate>36.0</updateRate>
+        <cameraName>sensor_camera</cameraName>
+        <imageTopicName>rgb/image_raw</imageTopicName>
+        <depthImageTopicName>depth/image_raw</depthImageTopicName>
+        <pointCloudTopicName>depth/points</pointCloudTopicName>
+        <cameraInfoTopicName>rgb/camera_info</cameraInfoTopicName>
+        <depthImageCameraInfoTopicName>depth/camera_info</depthImageCameraInfoTopicName>
+        <frameName>sensor_camera_depth</frameName> 
+        <hackBaseline>0.0</hackBaseline>
+        <distortionK1>0.0</distortionK1>
+        <distortionK2>0.0</distortionK2>
+        <distortionK3>0.0</distortionK3>
+        <distortionT1>0.0</distortionT1>
+        <distortionT2>0.0</distortionT2>
+        <pointCloudCutoff>0.4</pointCloudCutoff>
+      </plugin>
+    </sensor_plugin_config>
+  </xacro:add_sensor>
+</robot>
+
