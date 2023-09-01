@@ -11,3 +11,6 @@
 3. `source devel/setup.zsh`
 4. 运行`roslaunch scout_gazebo_sim scout_empty_world.launch`
 5. 运行键盘控制接口`roslaunch scout_gazebo_sim scout_empty_world.launch`
+
+## 注意
+- 看到的地面地形会闪，是因为ground_plane存在，删去就不会闪了
